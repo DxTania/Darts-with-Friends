@@ -6,5 +6,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="splash_text">DARTS WITH FRIENDS</string>
+    <string name="dartboard">Image of a dartboard</string>
+    <string name="game_type_501301">501/301</string>
+    <string name="game_type_cricket">Cricket</string>
 
 </resources>
