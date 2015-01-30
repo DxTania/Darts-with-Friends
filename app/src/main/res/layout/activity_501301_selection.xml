@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_weight="0.5"
+        android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingTop="10dp">
 
@@ -16,29 +17,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:fontFamily="sans-serif-thin"
-            android:text="@string/game_type_501301"
+            android:background="@drawable/dark_grey_stroke"
+            android:fontFamily="sans-serif"
+            android:paddingBottom="25dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="25dp"
+            android:text="@string/game501"
             android:textSize="40sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/dartboard"
-            android:padding="30dp"
-            android:src="@drawable/dart_board_selection" />
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="2dp"
-        android:layout_height="fill_parent"
-        android:background="@android:color/black" />
 
     <LinearLayout
         android:id="@+id/cricket"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_weight="0.5"
+        android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingTop="10dp">
 
@@ -46,16 +40,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:fontFamily="sans-serif-thin"
-            android:text="@string/game_type_cricket"
+            android:background="@drawable/dark_grey_stroke"
+            android:fontFamily="sans-serif"
+            android:paddingBottom="25dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="25dp"
+            android:text="@string/game301"
             android:textSize="40sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/dartboard"
-            android:padding="30dp"
-            android:src="@drawable/dart_board_selection" />
     </LinearLayout>
 </LinearLayout>

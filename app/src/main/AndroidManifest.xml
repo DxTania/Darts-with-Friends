@@ -12,6 +12,10 @@
             android:label="@string/app_name"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".Select501301Activity"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".SplashScreen"
             android:label="@string/title_activity_splash_screen"
             android:screenOrientation="landscape">

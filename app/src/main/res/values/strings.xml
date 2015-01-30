@@ -9,5 +9,7 @@
     <string name="dartboard">Image of a dartboard</string>
     <string name="game_type_501301">501/301</string>
     <string name="game_type_cricket">Cricket</string>
+    <string name="game501">501</string>
+    <string name="game301">301</string>
 
 </resources>
