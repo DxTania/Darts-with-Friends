@@ -8,12 +8,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import me.taniad.dartswithfriends.selection.OpponentSelectionActivity;
+
 
 public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Darts with Friends");
         setContentView(R.layout.activity_main);
 
         Button createGame = (Button) findViewById(R.id.create_game_button);

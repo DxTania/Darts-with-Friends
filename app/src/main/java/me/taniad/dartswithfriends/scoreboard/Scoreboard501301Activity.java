@@ -1,10 +1,12 @@
-package me.taniad.dartswithfriends;
+package me.taniad.dartswithfriends.scoreboard;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import me.taniad.dartswithfriends.R;
 
 
 public class Scoreboard501301Activity extends ActionBarActivity {
@@ -14,6 +16,7 @@ public class Scoreboard501301Activity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scoreboard501301);
+        setTitle("Scoreboard");
 
         type = getIntent().getStringExtra("gametype");
 
