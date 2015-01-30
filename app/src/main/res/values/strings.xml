@@ -4,5 +4,7 @@
     <string name="app_name">Darts with Friends</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="splash_text">DARTS WITH FRIENDS</string>
 
 </resources>
