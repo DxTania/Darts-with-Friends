@@ -18,7 +18,7 @@ public class SplashScreen extends ActionBarActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent game = new Intent(SplashScreen.this, GameSelectionActivity.class);
+                Intent game = new Intent(SplashScreen.this, MainActivity.class);
                 startActivity(game);
                 overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
             }

@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:id="@+id/game501301"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="0.5"
         android:orientation="vertical"
@@ -36,7 +36,7 @@
 
     <LinearLayout
         android:id="@+id/cricket"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="0.5"
         android:orientation="vertical"

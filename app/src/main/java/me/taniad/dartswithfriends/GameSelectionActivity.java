@@ -19,7 +19,10 @@ public class GameSelectionActivity extends ActionBarActivity {
         cricket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent cricket = new Intent(
+                        GameSelectionActivity.this, Scoreboard501301Activity.class);
+                startActivity(cricket);
+                overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
             }
         });
 
@@ -27,7 +30,8 @@ public class GameSelectionActivity extends ActionBarActivity {
         game501301.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent select501301 = new Intent(GameSelectionActivity.this, Select501301Activity.class);
+                Intent select501301 = new Intent(
+                        GameSelectionActivity.this, Select501301Activity.class);
                 startActivity(select501301);
                 overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
             }

@@ -11,5 +11,10 @@
     <string name="game_type_cricket">Cricket</string>
     <string name="game501">501</string>
     <string name="game301">301</string>
+    <string name="title_activity_scoreboard501301">Scoreboard501301Activity</string>
+    <string name="score_you">You</string>
+    <string name="score_opponent">Opponent</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_opponent_selection">OpponentSelectionActivity</string>
 
 </resources>

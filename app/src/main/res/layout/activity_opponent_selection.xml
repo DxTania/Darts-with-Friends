@@ -5,7 +5,7 @@
     android:orientation="horizontal">
 
     <LinearLayout
-        android:id="@+id/select501"
+        android:id="@+id/random_opponent"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="0.5"
@@ -18,15 +18,15 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:fontFamily="sans-serif-thin"
-            android:text="@string/game501"
-            android:textSize="40sp" />
+            android:text="Random Opponent"
+            android:textSize="30sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/dartboard"
+            android:contentDescription="Random opponent"
             android:padding="30dp"
-            android:src="@drawable/dart_board_selection" />
+            android:src="@drawable/random_opponent" />
     </LinearLayout>
 
     <RelativeLayout
@@ -35,7 +35,7 @@
         android:background="@android:color/black" />
 
     <LinearLayout
-        android:id="@+id/select301"
+        android:id="@+id/challenge_friend"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="0.5"
@@ -48,14 +48,14 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:fontFamily="sans-serif-thin"
-            android:text="@string/game301"
-            android:textSize="40sp" />
+            android:text="Challenge Friend"
+            android:textSize="30sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/dartboard"
+            android:contentDescription="Challenge friend"
             android:padding="30dp"
-            android:src="@drawable/dart_board_selection" />
+            android:src="@drawable/challenge_friend" />
     </LinearLayout>
 </LinearLayout>
