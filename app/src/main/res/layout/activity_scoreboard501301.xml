@@ -1,13 +1,40 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scoreboard"
+    android:id="@+id/scoreboardLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
+    <RelativeLayout
+        android:id="@+id/waiting_screen"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:id="@+id/waiting_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/waiting"
+            android:layout_centerInParent="true"
+            android:text="@string/waiting_for_opponent"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/waiting"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/waiting"
+            android:src="@drawable/waiting" />
+    </RelativeLayout>
+
+
     <LinearLayout
+        android:id="@+id/scoreboard"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:baselineAligned="false"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -15,7 +42,6 @@
             android:layout_weight="0.5"
             android:background="@drawable/dark_grey_stroke"
             android:orientation="vertical">
-
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -26,14 +52,26 @@
                 android:textColor="#343434"
                 android:textSize="25sp" />
 
-            <TextView
-                android:id="@+id/starting_score_you"
+            <ScrollView
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="@string/game301"
-                android:textSize="20sp" />
+                android:layout_height="fill_parent">
+
+                <LinearLayout
+                    android:id="@+id/scoreboard_you"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/starting_score_you"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="@string/game301"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
 
         <LinearLayout
@@ -53,14 +91,26 @@
                 android:textColor="#343434"
                 android:textSize="25sp" />
 
-            <TextView
-                android:id="@+id/starting_score_opponent"
+            <ScrollView
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="@string/game301"
-                android:textSize="20sp" />
+                android:layout_height="fill_parent">
+
+                <LinearLayout
+                    android:id="@+id/scoreboard_opponent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/starting_score_opponent"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="@string/game301"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
     </LinearLayout>
 
@@ -75,5 +125,6 @@
         android:background="@drawable/circle"
         android:contentDescription="@string/add_entry"
         android:elevation="10dp"
-        android:src="@android:drawable/ic_menu_edit" />
+        android:src="@android:drawable/ic_menu_edit"
+        android:visibility="gone" />
 </RelativeLayout>

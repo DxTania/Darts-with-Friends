@@ -24,7 +24,7 @@
             android:name=".SplashScreen"
             android:label="@string/title_activity_splash_screen"
             android:screenOrientation="landscape">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -57,12 +57,17 @@
         <activity
             android:name=".profile.LoginActivity"
             android:label="@string/title_activity_login"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity android:name="com.facebook.LoginActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
+
+        <activity
+            android:name=".selection.Score501301Selection"
+            android:label="@string/title_activity_score501301_selection"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

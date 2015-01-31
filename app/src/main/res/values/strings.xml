@@ -22,4 +22,11 @@
     <string name="create_game">Create Game</string>
     <string name="join_game">Join Game</string>
     <string name="darts_with_friends">Darts with Friends</string>
+    <string name="logout">Log Out</string>
+    <string name="waiting">Waiting</string>
+    <string name="waiting_for_opponent">Waiting for opponent</string>
+    <string name="title_activity_score501301_selection">Score501301Selection</string>
+    <string name="bullseye">BULLSEYE</string>
+    <string name="miss">MISS</string>
+
 </resources>

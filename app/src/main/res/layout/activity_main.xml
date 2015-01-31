@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_gravity="center_vertical"
+    android:gravity="center_vertical"
     android:orientation="vertical"
     android:padding="30dp">
 
@@ -24,26 +24,25 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-thin"
             android:paddingBottom="20dp"
-            android:text="Welcome back, Player"
             android:textSize="30sp" />
 
         <Button
             android:id="@+id/create_game_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Create Game" />
+            android:text="@string/create_game" />
 
         <Button
             android:id="@+id/join_game_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Join Game" />
+            android:text="@string/join_game" />
 
         <Button
             android:id="@+id/logout_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Log Out" />
+            android:text="@string/logout" />
     </LinearLayout>
 
 </LinearLayout>

@@ -25,6 +25,7 @@ public class GameSelectionActivity extends ActionBarActivity {
                 Intent cricket = new Intent(
                         GameSelectionActivity.this, Scoreboard501301Activity.class);
                 // TODO: send game creation to server with opponent selection
+                cricket.putExtra("creation", true);
                 startActivity(cricket);
                 overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
             }
