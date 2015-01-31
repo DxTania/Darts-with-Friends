@@ -18,7 +18,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:fontFamily="sans-serif-thin"
-            android:text="Random Opponent"
+            android:gravity="center"
+            android:text="Random\nOpponent"
             android:textSize="30sp" />
 
         <ImageView
@@ -48,7 +49,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:fontFamily="sans-serif-thin"
-            android:text="Challenge Friend"
+            android:gravity="center"
+            android:text="Challenge\nFriend"
             android:textSize="30sp" />
 
         <ImageView

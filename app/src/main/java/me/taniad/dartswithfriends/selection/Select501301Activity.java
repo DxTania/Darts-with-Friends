@@ -36,10 +36,13 @@ public class Select501301Activity extends ActionBarActivity {
     }
 
     public void sendGame(String type) {
-        Intent opponent = new Intent(
+        Intent scoreboard = new Intent(
                 Select501301Activity.this, Scoreboard501301Activity.class);
-        opponent.putExtra("gametype", type);
-        startActivity(opponent);
+        scoreboard.putExtra("gametype", type);
+        // TODO: send game creation to server with opponent selection
+        scoreboard.putExtra("creation", true);
+
+        startActivity(scoreboard);
         overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
     }
 }

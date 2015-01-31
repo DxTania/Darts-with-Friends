@@ -17,6 +17,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Darts with Friends");
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
         Button createGame = (Button) findViewById(R.id.create_game_button);
@@ -28,8 +29,16 @@ public class MainActivity extends ActionBarActivity {
                 overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
             }
         });
-    }
 
+        Button joinGame = (Button) findViewById(R.id.join_game_button);
+        joinGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: send join request to server for random game
+                // once opponent is found, use game info to start correct scoreboard
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

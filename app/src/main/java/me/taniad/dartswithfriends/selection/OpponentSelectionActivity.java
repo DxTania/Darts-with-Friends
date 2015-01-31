@@ -17,14 +17,11 @@ public class OpponentSelectionActivity extends ActionBarActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_opponent_selection);
 
-        // since we are creating the game, we get to go first
-
         LinearLayout challengeFriend = (LinearLayout) findViewById(R.id.challenge_friend);
         challengeFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // find friend ..
-                // then choose game type
+                // find friend .. id
                 chooseGame();
             }
         });
@@ -33,8 +30,7 @@ public class OpponentSelectionActivity extends ActionBarActivity {
         randomOpponent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // match with person ...
-                // then choose game type
+                // match with person ... get id
                 chooseGame();
             }
         });
@@ -43,6 +39,7 @@ public class OpponentSelectionActivity extends ActionBarActivity {
     public void chooseGame() {
         Intent gameSelection = new Intent(
                 OpponentSelectionActivity.this, GameSelectionActivity.class);
+        // TODO: have id of opponent to send to game selection
         startActivity(gameSelection);
         overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
     }

@@ -16,5 +16,6 @@
     <string name="score_opponent">Opponent</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_opponent_selection">OpponentSelectionActivity</string>
+    <string name="add_entry">Add entry</string>
 
 </resources>
