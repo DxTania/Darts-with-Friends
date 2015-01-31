@@ -17,5 +17,9 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_opponent_selection">OpponentSelectionActivity</string>
     <string name="add_entry">Add entry</string>
-
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_id">801232726610739</string>
+    <string name="create_game">Create Game</string>
+    <string name="join_game">Join Game</string>
+    <string name="darts_with_friends">Darts with Friends</string>
 </resources>

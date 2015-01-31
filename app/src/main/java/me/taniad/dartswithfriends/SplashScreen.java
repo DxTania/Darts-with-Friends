@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 
+import me.taniad.dartswithfriends.profile.LoginActivity;
+
 public class SplashScreen extends ActionBarActivity {
     // Splash screen time out
     private static final int TIME_OUT = 3000;
@@ -18,8 +20,8 @@ public class SplashScreen extends ActionBarActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent game = new Intent(SplashScreen.this, MainActivity.class);
-                startActivity(game);
+                Intent login = new Intent(SplashScreen.this, LoginActivity.class);
+                startActivity(login);
                 overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
                 finish();
             }

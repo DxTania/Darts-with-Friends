@@ -3,15 +3,25 @@ package me.taniad.dartswithfriends;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.facebook.HttpMethod;
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+
+import me.taniad.dartswithfriends.profile.LoginActivity;
+import me.taniad.dartswithfriends.scoreboard.Scoreboard501301Activity;
 import me.taniad.dartswithfriends.selection.OpponentSelectionActivity;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    private TextView playerWelcome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,29 +46,47 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 // TODO: send join request to server for random game
                 // once opponent is found, use game info to start correct scoreboard
+                Intent game = new Intent(MainActivity.this, Scoreboard501301Activity.class);
+                game.putExtra("creation", false);
+                startActivity(game);
+                overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
             }
         });
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+        Button logOut = (Button) findViewById(R.id.logout_button);
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Session session = Session.getActiveSession();
+                if (session != null) {
+                    if (!session.isClosed()) {
+                        session.closeAndClearTokenInformation();
+                        Intent login = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(login);
+                        finish();
+                    }
+                }
+            }
+        });
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        playerWelcome = (TextView) findViewById(R.id.playerName);
+        final ProgressBar bar = (ProgressBar) findViewById(R.id.progress);
+        final LinearLayout main = (LinearLayout) findViewById(R.id.main);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        new Request(
+                Session.getActiveSession(),
+                "/me",
+                null,
+                HttpMethod.GET,
+                new Request.Callback() {
+                    public void onCompleted(Response response) {
+                        playerWelcome.setText("Welcome, " +
+                                response.getGraphObject().getProperty("name"));
+                        bar.setVisibility(View.GONE);
+                        main.setVisibility(View.VISIBLE);
+                    }
+                }
+        ).executeAsync();
 
-        return super.onOptionsItemSelected(item);
     }
 }

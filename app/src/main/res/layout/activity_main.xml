@@ -1,27 +1,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:layout_gravity="center_vertical"
     android:orientation="vertical"
     android:padding="30dp">
 
-    <TextView
+    <ProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-thin"
-        android:paddingBottom="20dp"
-        android:text="Welcome back, Player"
-        android:textSize="30sp" />
+        android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/create_game_button"
+    <LinearLayout
+        android:id="@+id/main"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Create Game" />
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-    <Button
-        android:id="@+id/join_game_button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Join Game" />
+        <TextView
+            android:id="@+id/playerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:paddingBottom="20dp"
+            android:text="Welcome back, Player"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/create_game_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Game" />
+
+        <Button
+            android:id="@+id/join_game_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Join Game" />
+
+        <Button
+            android:id="@+id/logout_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Log Out" />
+    </LinearLayout>
 
 </LinearLayout>
