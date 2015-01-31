@@ -5,8 +5,6 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -20,7 +18,7 @@ import me.taniad.dartswithfriends.selection.Score501301Selection;
 
 
 public class Scoreboard501301Activity extends ActionBarActivity {
-    private final static int REQUEST_CODE = 100;
+    private final static int SEND_SCORE = 100;
     private static String type;
     private TextView waitingText, prevScoreUs, prevScoreOpponent;
     private RelativeLayout waitingScreen;
@@ -36,29 +34,19 @@ public class Scoreboard501301Activity extends ActionBarActivity {
         setTitle("Scoreboard");
 
         final ImageButton addEntry = (ImageButton) findViewById(R.id.add_entry);
-        waitingText = (TextView) findViewById(R.id.waiting_text);
         addEntry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: pop up dart score selection
                 Intent scoreSelect = new Intent(
                         Scoreboard501301Activity.this, Score501301Selection.class);
-                startActivityForResult(scoreSelect, REQUEST_CODE);
+                startActivityForResult(scoreSelect, SEND_SCORE);
             }
         });
+        waitingText = (TextView) findViewById(R.id.waiting_text);
         waitingScreen = (RelativeLayout) findViewById(R.id.waiting_screen);
         scoreboardYou = (LinearLayout) findViewById(R.id.scoreboard_you);
         scoreboardOpponent = (LinearLayout) findViewById(R.id.scoreboard_opponent);
         scoreboard = (LinearLayout) findViewById(R.id.scoreboard);
-
-        waitingScreen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                waitingScreen.setVisibility(View.INVISIBLE);
-                addEntry.setVisibility(View.VISIBLE);
-                scoreboard.setVisibility(View.VISIBLE);
-            }
-        });
 
         type = getIntent().getStringExtra("gametype");
         // scores start at 501 or 301
@@ -70,7 +58,18 @@ public class Scoreboard501301Activity extends ActionBarActivity {
         opponentScore = Integer.valueOf(type);
 
         boolean creation = getIntent().getBooleanExtra("creation", false);
-        // TODO: wait for response from server
+
+
+        // TODO: wait for response from server before getting rid of loading
+        waitingScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                waitingScreen.setVisibility(View.INVISIBLE);
+                addEntry.setVisibility(View.VISIBLE);
+                scoreboard.setVisibility(View.VISIBLE);
+            }
+        });
+
         if (creation) {
             waitingText.setText("Creating game");
         } else {
@@ -80,9 +79,10 @@ public class Scoreboard501301Activity extends ActionBarActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE) {
+        if (requestCode == SEND_SCORE) {
             int score = data.getIntExtra("score", 0);
             subScore(score, true);
+            // TODO: send score to server + opponent's turn now
         }
     }
 
@@ -119,27 +119,5 @@ public class Scoreboard501301Activity extends ActionBarActivity {
             prevScoreOpponent.setPaintFlags(prevScoreOpponent.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             prevScoreOpponent = row;
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_scoreboard501301, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

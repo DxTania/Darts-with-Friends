@@ -39,7 +39,7 @@ public class Select501301Activity extends ActionBarActivity {
         Intent scoreboard = new Intent(
                 Select501301Activity.this, Scoreboard501301Activity.class);
         scoreboard.putExtra("gametype", type);
-        // TODO: send game creation to server with opponent selection
+        // TODO: send game creation to server with opponent selection + wait server response
         scoreboard.putExtra("creation", true);
 
         startActivity(scoreboard);

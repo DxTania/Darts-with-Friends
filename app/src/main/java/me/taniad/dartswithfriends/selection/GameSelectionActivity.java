@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import me.taniad.dartswithfriends.R;
-import me.taniad.dartswithfriends.scoreboard.Scoreboard501301Activity;
+import me.taniad.dartswithfriends.scoreboard.ScoreboardCricketActivity;
 
 
 public class GameSelectionActivity extends ActionBarActivity {
@@ -23,8 +23,8 @@ public class GameSelectionActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent cricket = new Intent(
-                        GameSelectionActivity.this, Scoreboard501301Activity.class);
-                // TODO: send game creation to server with opponent selection
+                        GameSelectionActivity.this, ScoreboardCricketActivity.class);
+                // TODO: send game creation to server with opponent selection + wait server response
                 cricket.putExtra("creation", true);
                 startActivity(cricket);
                 overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
