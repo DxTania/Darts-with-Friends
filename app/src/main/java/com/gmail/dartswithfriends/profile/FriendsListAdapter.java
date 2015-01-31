@@ -2,6 +2,7 @@ package com.gmail.dartswithfriends.profile;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.facebook.model.GraphObjectList;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.ProfilePictureView;
 import com.gmail.dartswithfriends.R;
+import com.gmail.dartswithfriends.selection.GameSelectionActivity;
 
 
 public class FriendsListAdapter implements ListAdapter {
@@ -78,9 +80,21 @@ public class FriendsListAdapter implements ListAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        GraphUser friend = mFriends.get(position);
+        final GraphUser friend = mFriends.get(position);
         viewHolder.friendName.setText(friend.getName());
         viewHolder.friendImage.setProfileId(friend.getId());
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // create game with user id
+                Intent gameSelection = new Intent(mContext, GameSelectionActivity.class);
+                gameSelection.putExtra("userid", friend.getId());
+                mContext.startActivity(gameSelection);
+                ((Activity) mContext).overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
+                ((Activity) mContext).finish();
+            }
+        });
 
         return convertView;
     }

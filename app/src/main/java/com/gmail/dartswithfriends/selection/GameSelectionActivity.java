@@ -18,6 +18,8 @@ public class GameSelectionActivity extends ActionBarActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_game_selection);
 
+        int userId = getIntent().getIntExtra("userid", 0);
+
         LinearLayout cricket = (LinearLayout) findViewById(R.id.cricket);
         cricket.setOnClickListener(new View.OnClickListener() {
             @Override
