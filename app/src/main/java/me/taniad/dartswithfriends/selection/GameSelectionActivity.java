@@ -28,6 +28,7 @@ public class GameSelectionActivity extends ActionBarActivity {
                 cricket.putExtra("creation", true);
                 startActivity(cricket);
                 overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
+                finish();
             }
         });
 
@@ -39,6 +40,7 @@ public class GameSelectionActivity extends ActionBarActivity {
                         GameSelectionActivity.this, Select501301Activity.class);
                 startActivity(select501301);
                 overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
+                finish();
             }
         });
     }

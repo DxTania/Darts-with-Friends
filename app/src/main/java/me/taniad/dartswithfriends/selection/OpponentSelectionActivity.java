@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import me.taniad.dartswithfriends.R;
+import me.taniad.dartswithfriends.profile.FriendSelectionActivity;
 
 
 public class OpponentSelectionActivity extends ActionBarActivity {
@@ -22,7 +23,10 @@ public class OpponentSelectionActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 // find friend .. id
-                chooseGame();
+                Intent chooseFriend = new Intent(
+                        OpponentSelectionActivity.this, FriendSelectionActivity.class);
+                startActivity(chooseFriend);
+                finish();
             }
         });
 
@@ -31,16 +35,13 @@ public class OpponentSelectionActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 // match with person ... get id
-                chooseGame();
+                Intent gameSelection = new Intent(
+                        OpponentSelectionActivity.this, GameSelectionActivity.class);
+                // TODO: have id of opponent to send to game selection
+                startActivity(gameSelection);
+                overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
+                finish();
             }
         });
-    }
-
-    public void chooseGame() {
-        Intent gameSelection = new Intent(
-                OpponentSelectionActivity.this, GameSelectionActivity.class);
-        // TODO: have id of opponent to send to game selection
-        startActivity(gameSelection);
-        overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
     }
 }

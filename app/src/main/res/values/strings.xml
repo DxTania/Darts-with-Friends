@@ -29,5 +29,9 @@
     <string name="bullseye">BULLSEYE</string>
     <string name="miss">MISS</string>
     <string name="title_activity_scoreboard_cricket">ScoreboardCricketActivity</string>
+    <string name="title_activity_friend_selection">FriendSelectionActivity</string>
+    <string name="triple">Triple</string>
+    <string name="doubleT">Double</string>
+    <string name="single">Single</string>
 
 </resources>
