@@ -1,4 +1,4 @@
-package me.taniad.dartswithfriends.profile;
+package com.gmail.dartswithfriends.profile;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,10 +12,9 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.LoginButton;
+import com.gmail.dartswithfriends.R;
 
 import java.util.Arrays;
-
-import me.taniad.dartswithfriends.R;
 
 /**
  * A simple {@link Fragment} subclass.

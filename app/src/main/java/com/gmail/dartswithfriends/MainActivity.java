@@ -1,4 +1,4 @@
-package me.taniad.dartswithfriends;
+package com.gmail.dartswithfriends;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +13,9 @@ import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
-
-import me.taniad.dartswithfriends.profile.LoginActivity;
-import me.taniad.dartswithfriends.scoreboard.Scoreboard501301Activity;
-import me.taniad.dartswithfriends.selection.OpponentSelectionActivity;
-
+import com.gmail.dartswithfriends.profile.LoginActivity;
+import com.gmail.dartswithfriends.scoreboard.Scoreboard501301Activity;
+import com.gmail.dartswithfriends.selection.OpponentSelectionActivity;
 
 public class MainActivity extends ActionBarActivity {
 

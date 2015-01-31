@@ -1,4 +1,4 @@
-package me.taniad.dartswithfriends;
+package com.gmail.dartswithfriends;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

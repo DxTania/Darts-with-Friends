@@ -1,4 +1,4 @@
-package me.taniad.dartswithfriends.profile;
+package com.gmail.dartswithfriends.profile;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -9,10 +9,9 @@ import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
+import com.gmail.dartswithfriends.R;
 
 import org.json.JSONException;
-
-import me.taniad.dartswithfriends.R;
 
 public class FriendSelectionActivity extends ActionBarActivity {
     private ListAdapter adapter;
@@ -34,7 +33,7 @@ public class FriendSelectionActivity extends ActionBarActivity {
                 HttpMethod.GET,
                 new Request.Callback() {
                     public void onCompleted(Response response) {
-                        Object blah = response.getGraphObject().getProperty("summary");
+                        Object blah = response.getGraphObject().getProperty("data");
                         try {
                             adapter = new FriendsListAdapter(response.getGraphObject().getInnerJSONObject().getJSONArray("data"));
                             friends.setAdapter(adapter);

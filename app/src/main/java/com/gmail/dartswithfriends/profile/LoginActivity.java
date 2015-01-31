@@ -1,4 +1,4 @@
-package me.taniad.dartswithfriends.profile;
+package com.gmail.dartswithfriends.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,8 +6,7 @@ import android.support.v4.app.FragmentActivity;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
-
-import me.taniad.dartswithfriends.MainActivity;
+import com.gmail.dartswithfriends.MainActivity;
 
 
 public class LoginActivity extends FragmentActivity implements LoginFragment.OnFragmentInteractionListener {

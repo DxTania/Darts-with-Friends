@@ -1,4 +1,4 @@
-package me.taniad.dartswithfriends.profile;
+package com.gmail.dartswithfriends.profile;
 
 import android.database.DataSetObserver;
 import android.view.View;

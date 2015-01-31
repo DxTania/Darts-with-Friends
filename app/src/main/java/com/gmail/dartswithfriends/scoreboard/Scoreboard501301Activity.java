@@ -1,4 +1,4 @@
-package me.taniad.dartswithfriends.scoreboard;
+package com.gmail.dartswithfriends.scoreboard;
 
 import android.content.Intent;
 import android.graphics.Paint;
@@ -11,10 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.json.JSONObject;
+import com.gmail.dartswithfriends.R;
+import com.gmail.dartswithfriends.selection.Score501301Selection;
 
-import me.taniad.dartswithfriends.R;
-import me.taniad.dartswithfriends.selection.Score501301Selection;
+import org.json.JSONObject;
 
 
 public class Scoreboard501301Activity extends ActionBarActivity {

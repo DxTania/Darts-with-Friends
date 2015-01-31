@@ -1,9 +1,9 @@
-package me.taniad.dartswithfriends.scoreboard;
+package com.gmail.dartswithfriends.scoreboard;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
-import me.taniad.dartswithfriends.R;
+import com.gmail.dartswithfriends.R;
 
 
 public class ScoreboardCricketActivity extends ActionBarActivity {

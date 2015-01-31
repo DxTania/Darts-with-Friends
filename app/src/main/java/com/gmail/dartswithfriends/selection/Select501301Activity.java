@@ -1,4 +1,4 @@
-package me.taniad.dartswithfriends.selection;
+package com.gmail.dartswithfriends.selection;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,8 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import me.taniad.dartswithfriends.R;
-import me.taniad.dartswithfriends.scoreboard.Scoreboard501301Activity;
+import com.gmail.dartswithfriends.R;
+import com.gmail.dartswithfriends.scoreboard.Scoreboard501301Activity;
 
 
 public class Select501301Activity extends ActionBarActivity {

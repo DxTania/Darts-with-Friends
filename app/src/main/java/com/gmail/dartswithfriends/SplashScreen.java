@@ -1,11 +1,11 @@
-package me.taniad.dartswithfriends;
+package com.gmail.dartswithfriends;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 
-import me.taniad.dartswithfriends.profile.LoginActivity;
+import com.gmail.dartswithfriends.profile.LoginActivity;
 
 public class SplashScreen extends ActionBarActivity {
     // Splash screen time out

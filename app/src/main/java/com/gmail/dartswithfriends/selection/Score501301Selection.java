@@ -1,4 +1,4 @@
-package me.taniad.dartswithfriends.selection;
+package com.gmail.dartswithfriends.selection;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import me.taniad.dartswithfriends.R;
+import com.gmail.dartswithfriends.R;
 
 public class Score501301Selection extends ActionBarActivity {
     private int dartNum = 1;
