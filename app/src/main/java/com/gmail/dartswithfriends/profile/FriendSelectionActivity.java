@@ -2,19 +2,22 @@ package com.gmail.dartswithfriends.profile;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.widget.ListAdapter;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
+import com.facebook.model.GraphObjectList;
+import com.facebook.model.GraphUser;
 import com.gmail.dartswithfriends.R;
 
 import org.json.JSONException;
 
 public class FriendSelectionActivity extends ActionBarActivity {
-    private ListAdapter adapter;
+    private static final String TAG = "FriendSelectionActivity";
+    private FriendsListAdapter adapter;
     private ListView friends;
 
     @Override
@@ -25,7 +28,6 @@ public class FriendSelectionActivity extends ActionBarActivity {
 
         friends = (ListView) findViewById(R.id.friendList);
 
-        // TODO: get tylor to enable so i actually get a response
         new Request(
                 Session.getActiveSession(),
                 "/me/friends",
@@ -33,15 +35,22 @@ public class FriendSelectionActivity extends ActionBarActivity {
                 HttpMethod.GET,
                 new Request.Callback() {
                     public void onCompleted(Response response) {
-                        Object blah = response.getGraphObject().getProperty("data");
                         try {
-                            adapter = new FriendsListAdapter(response.getGraphObject().getInnerJSONObject().getJSONArray("data"));
-                            friends.setAdapter(adapter);
+                            onFriendsListRetrieved(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 }
         ).executeAsync();
+    }
+
+    private void onFriendsListRetrieved(Response response) throws JSONException {
+        GraphObjectList<GraphUser> data = response.getGraphObject().getPropertyAsList("data", GraphUser.class);
+        Log.d(TAG, data.toString());
+        adapter = new FriendsListAdapter(FriendSelectionActivity.this, data);
+        friends.setAdapter(adapter);
+        // start async tasks to get photos
+
     }
 }

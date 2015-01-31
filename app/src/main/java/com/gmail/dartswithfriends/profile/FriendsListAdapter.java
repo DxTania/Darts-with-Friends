@@ -1,19 +1,28 @@
 package com.gmail.dartswithfriends.profile;
 
+import android.app.Activity;
+import android.content.Context;
 import android.database.DataSetObserver;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
+import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
+import com.facebook.model.GraphObjectList;
+import com.facebook.model.GraphUser;
+import com.facebook.widget.ProfilePictureView;
+import com.gmail.dartswithfriends.R;
 
 
 public class FriendsListAdapter implements ListAdapter {
-    JSONArray friends;
+    private static final String TAG = "FriendsListAdapter";
+    private GraphObjectList<GraphUser> mFriends;
+    private Context mContext;
 
-    FriendsListAdapter(JSONArray jFriends) {
-        friends = jFriends;
+    FriendsListAdapter(Context context, GraphObjectList<GraphUser> jFriends) {
+        mFriends = jFriends;
+        mContext = context;
     }
 
     @Override
@@ -38,16 +47,12 @@ public class FriendsListAdapter implements ListAdapter {
 
     @Override
     public int getCount() {
-        return friends.length();
+        return mFriends.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        try {
-            return friends.get(position);
-        } catch (JSONException e) {
-            return null;
-        }
+    public GraphUser getItem(int position) {
+        return mFriends.get(position);
     }
 
     @Override
@@ -62,7 +67,22 @@ public class FriendsListAdapter implements ListAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        ViewHolder viewHolder = new ViewHolder();
+
+        if (convertView == null) {
+            LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
+            convertView = inflater.inflate(R.layout.friend_view, parent, false);
+            viewHolder.friendName = (TextView) convertView.findViewById(R.id.friend_name);
+            viewHolder.friendImage = (ProfilePictureView) convertView.findViewById(R.id.friend_picture);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        GraphUser friend = mFriends.get(position);
+        viewHolder.friendName.setText(friend.getName());
+        viewHolder.friendImage.setProfileId(friend.getId());
+
+        return convertView;
     }
 
     @Override
@@ -72,11 +92,16 @@ public class FriendsListAdapter implements ListAdapter {
 
     @Override
     public int getViewTypeCount() {
-        return 0;
+        return 1;
     }
 
     @Override
     public boolean isEmpty() {
         return false;
+    }
+
+    static class ViewHolder {
+        ProfilePictureView friendImage;
+        TextView friendName;
     }
 }
