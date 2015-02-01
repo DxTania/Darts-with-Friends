@@ -73,8 +73,6 @@ process.on( 'uncaughtException', function( error ) {
 var app = express();
 // Body parser for parameter reading
 app.use( bodyParser.json() );
-// Cookie parser for authentication cookies later
-app.use( cookieParser() );
 // Validator which will help with validating request params
 app.use( expressValidator() );
 

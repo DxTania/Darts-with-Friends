@@ -9,32 +9,43 @@
 var mongoose = require('mongoose'),
     uniqueValidator = require('mongoose-unique-validator'),
     Schema = mongoose.Schema,
+    User = mongoose.model("User"),
     crypto = require('crypto');
 
 
 var GameSchema = new Schema({
-  gameType:           { type: String }
+  gameType:           { type: String },
+  playerOne:          {
+                        id: Number,
+                        name: String
+                      },
+  playerTwo:          {
+                        id: Number,
+                        name: String
+                      },
+  turnPlayerId:       { type: Number },
+  scoresOne:          [ type: Number ],
+  scoresTwo:          [ type: Number ],
+  startDate:          { type: Date, default Date.now },
+  endDate:            { type: Date },
+  winnerId:           { type: Number },
+  loserId:            { type: Number },
+  status:             { type: String, default: "pending" },
+  turnCount:          { type: Number, default: 0 }
+
   // TODO: Game Schema
 });
 
 
 // Requirements
-// TODO: Required field validations
-// UserSchema.path('userName').required( true, 'Please provide a userName.');
-// UserSchema.plugin( uniqueValidator, { message: 'That userName is already in use.'} );
+// TODO: Required fields
 
 // Model Helpers
 GameSchema.methods = {
 
-  // checkPassword: function( inPass ) {
-  //   if ( !inPass ) inPass = '';
-  //   var pwElements = this.password.split( ':', 3 );
-  //   var algo = pwElements[0], salt = pwElements[1], validHash = pwElements[2];
+};
 
-  //   var hash = crypto.createHash( 'sha1' ).update( salt + inPass ).digest( 'hex' );
-  //   return ( hash === validHash );
-  // }
-
+GameSchema.statics = {
 };
 
 // Exported MODEL

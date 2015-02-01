@@ -12,19 +12,19 @@ var mongoose = require( 'mongoose' ),
 exports.bind = function( app ) {
 	var userRouter = express.Router();
 
-	var userResponse = function( user, responseObj ) {
-		var censoredFields = { passwords: true, extAuthTokens: true };
-		var censoredUser = Utils.Security.censorResponse( user, censoredFields );
-		Utils.Security.setAuthCookie( user, responseObj );
-		api.JsonResponse( censoredUser, responseObj, 200 );
-	}
+	// var userResponse = function( user, responseObj ) {
+	// 	var censoredFields = { passwords: true, extAuthTokens: true };
+	// 	var censoredUser = Utils.Security.censorResponse( user, censoredFields );
+	// 	Utils.Security.setAuthCookie( user, responseObj );
+	// 	api.JsonResponse( censoredUser, responseObj, 200 );
+	// }
 
-	var invalidAuthResponse = function( responseObj ) {
- 	  api.JsonResponse( 'Invalid userName/password combination.', responseObj, 400 );
- 	  return;
-	}
+	// var invalidAuthResponse = function( responseObj ) {
+ // 	  api.JsonResponse( 'Invalid userName/password combination.', responseObj, 400 );
+ // 	  return;
+	// }
 
-	// User input validation middleware
+	// // User input validation middleware
 	// userRouter.use( function( request, response, next ) {
 	// 	if ( !request.body.password ) {
 	// 		api.JsonResponse( 'ERROR: Please provide a password.', response, 400 );

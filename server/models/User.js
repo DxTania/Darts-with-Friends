@@ -13,10 +13,11 @@ var mongoose = require('mongoose'),
 
 
 var UserSchema = new Schema({
-  userName:           { type: String, unique: true },
+  name:               { type: String, unique: true },
+  isFacebook:         { type: Boolean },
   password:           { type: String },
-  authToken:          { type: String },
-  fbAuthToken:        { type: String }
+  authToken:          { type: String }
+  //TODO: Statistics
 });
 
 
@@ -37,6 +38,11 @@ UserSchema.methods = {
   }
 
 };
+
+// Static Methods
+UserSchema.statics.findById = function findById( id, callback ) {
+  return this.where( {_id: id} ).exec( callback );
+}
 
 // Exported MODEL
 module.exports = UserSchema;
