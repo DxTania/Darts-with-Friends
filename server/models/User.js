@@ -16,13 +16,13 @@ var UserSchema = new Schema({
   name:               { type: String, unique: true },
   isFacebook:         { type: Boolean },
   password:           { type: String },
-  authToken:          { type: String }
-  //TODO: Statistics
+  authToken:          { type: String },
+  fbAuthToken:        { type: String }
 });
 
 
 // Requirements
-UserSchema.path('userName').required( true, 'Please provide a userName.');
+// UserSchema.path('name').required( true, 'Please provide a userName.');
 UserSchema.plugin( uniqueValidator, { message: 'That userName is already in use.'} );
 
 // Model Helpers
@@ -40,8 +40,13 @@ UserSchema.methods = {
 };
 
 // Static Methods
-UserSchema.statics.findById = function findById( id, callback ) {
-  return this.where( {_id: id} ).exec( callback );
+UserSchema.statics = {
+  findById: function findOne( id, callback ) {
+    return this.where( {"_id": id} ).exec( callback );
+  },
+  findByName: function findOne( name, callback ) {
+    return this.where({ "name": name } ).exec( callback );
+  }
 }
 
 // Exported MODEL

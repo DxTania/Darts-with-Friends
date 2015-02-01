@@ -1,7 +1,7 @@
 var mongoose = require( 'mongoose' ),
 		api = require( API_CORE ),
+	Utils = require( UTILS_PATH ),
 		User = mongoose.model( 'User' ),
-		Utils = require( UTILS_PATH ),
 		express = require( 'express' );
 
 
@@ -12,69 +12,84 @@ var mongoose = require( 'mongoose' ),
 exports.bind = function( app ) {
 	var userRouter = express.Router();
 
-	// var userResponse = function( user, responseObj ) {
-	// 	var censoredFields = { passwords: true, extAuthTokens: true };
-	// 	var censoredUser = Utils.Security.censorResponse( user, censoredFields );
-	// 	Utils.Security.setAuthCookie( user, responseObj );
-	// 	api.JsonResponse( censoredUser, responseObj, 200 );
-	// }
+	var userResponse = function( user, responseObj ) {
+		var censoredFields = { password: true };
+		var censoredUser = Utils.Security.censorResponse( user, censoredFields );
+		// TODO: Implement header auth
+		//Utils.Security.setAuthCookie( user, responseObj );
+		api.JsonResponse( censoredUser, responseObj, 200 );
+	}
 
-	// var invalidAuthResponse = function( responseObj ) {
- // 	  api.JsonResponse( 'Invalid userName/password combination.', responseObj, 400 );
- // 	  return;
-	// }
+	var invalidAuthResponse = function( responseObj ) {
+ 	  api.JsonResponse( 'Invalid userName/password combination.', responseObj, 400 );
+ 	  return;
+	}
 
-	// // User input validation middleware
-	// userRouter.use( function( request, response, next ) {
-	// 	if ( !request.body.password ) {
-	// 		api.JsonResponse( 'ERROR: Please provide a password.', response, 400 );
-	// 		return;
-	// 	}
-	// 	if ( ! request.body.userName ) {
-	// 		api.JsonResponse( 'ERROR: Please provide a userName.', response, 400 );
-	// 		return;
-	// 	}
-	// 	next();
-	// });
+	// For requiring post parameters
+	var requirables = [ "authToken", "name", "isFacebook", "fbAuthToken" ];
+	var requireParam = [];
+	for ( var i = 0; i < requirables.length; i++ ) {
+		requireParam[requirables[i]] = function( req, res, next ) {
+			if ( !req.body[requirables[i]] ) {
+				api.JsonResponse( "Missing parameter: " + requirables[i], res, 400 );
+				return false;
+			}
+			return next();
+		}
+	}
 
-	// // Registration
-	// userRouter.post( '/register', function( request, response ) {
-	// 	// Create newUser object and setup auth data
-	// 	var newUser = new User({
-	// 		userName: request.body.userName
-	// 	});
-	// 	newUser.password = Utils.Security.encryptPassword( request.body.password );
-	// 	newUser.authToken = Utils.Security.getAuthToken();
+	// Create new user, require name and post parameters
+	userRouter.post( '/', requireParam["name"], requireParam["isFacebook"], function( req, res, next ) {
+		// TODO Validate Parameters
+		var newUser = new User({
+			name: req.body.name
+		});
 
-	// 	// Assuming no error return the new user object.
-	// 	newUser.save( function( error, user ) {
-	// 		if ( error ) {
-	// 			api.ServerErrorResponse( error, response );
-	// 			return;
-	// 		}
-	// 		userResponse( user, response );
-	// 	});
+		// If not facebook register, build password
+		if ( !req.body.isFacebook ) {
+			newUser.password = Utils.Security.encryptPassword( req.body.password );
 
-	// });
+		} else if ( !requireParam["fbAuthToken"] ) {
+			// If facebook register, require fbAuthToken
+			return next();
+		} else {
+			// Give new user it's fbAuthToken value
+			newUser.fbAuthToken = req.body.fbAuthToken;
+		}
 
-	// // Resends auth token to user.
-	// userRouter.post( '/authorize', function( request, response ) {
-	// 	User.findOne({ userName: request.body.userName },
-	// 		function( error, existingUser ) {
-	// 		 	if ( error ) {
-	// 		 		api.ServerErrorResponse( error, response );
-	// 		 		return;
-	// 		 	}
-	// 		 	if ( !existingUser ) {
-	// 		 	  invalidAuthResponse( response );
-	// 		 	}
-	// 		 	if ( existingUser.checkPassword( request.body.password ) ) {
-	// 		 		userResponse( existingUser, response );
-	// 		 	} else {
-	// 		 		invalidAuthResponse( response );
-	// 		 	}
-	// 		 });
-	// });
+		newUser.authToken = Utils.Security.getAuthToken();
+
+		newUser.save( function( err, user ) {
+			if ( err ) {
+				api.ServerErrorResponse( err, res );
+				return;
+			}
+			userResponse( user, res );
+			return next();
+		});
+	});
+
+
+	// Resends auth token to user.
+	userRouter.post( '/signin', requireParam["isFacebook"], function( req, res, next ) {
+		// TODO: validate parameters
+		User.findByName( req.body.name , function( error, existingUser ) {
+			if ( error ) {
+				api.ServerErrorResponse( error, res );
+			 	return;
+			}
+
+		 	if ( !existingUser || ( !req.body.isFacebook && !existingUser.checkPassword( req.body.password) )
+				   || ( req.body.isFacebook && existingUser.fbAuthToken != req.body["fbAuthToken"] )) {
+		 	  invalidAuthResponse( res );
+				return;
+			}
+
+		 	userResponse( existingUser, res );
+			return next();
+
+		});
+	});
 
 	// Link user router to application
 	app.use( '/user', userRouter );

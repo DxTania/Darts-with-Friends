@@ -7,10 +7,7 @@
 //* @requires crypto
 //*******************************************
 var mongoose = require('mongoose'),
-    uniqueValidator = require('mongoose-unique-validator'),
-    Schema = mongoose.Schema,
-    User = mongoose.model("User"),
-    crypto = require('crypto');
+    Schema = mongoose.Schema;
 
 
 var GameSchema = new Schema({
@@ -24,9 +21,9 @@ var GameSchema = new Schema({
                         name: String
                       },
   turnPlayerId:       { type: Number },
-  scoresOne:          [ type: Number ],
-  scoresTwo:          [ type: Number ],
-  startDate:          { type: Date, default Date.now },
+  scoresOne:          [ Number ],
+  scoresTwo:          [ Number ],
+  startDate:          { type: Date, default: Date.now },
   endDate:            { type: Date },
   winnerId:           { type: Number },
   loserId:            { type: Number },
@@ -46,6 +43,13 @@ GameSchema.methods = {
 };
 
 GameSchema.statics = {
+  findById: function findById( id, callback ) {
+    return this.where( {"_id": id} ).findOne( callback );
+  },
+  findByPlayerId: function( id, callback ) {
+    return this.where( {"playerOne": {"id": id }} ).or( {"playerTwo": {"id": id }} ).exec( callback );
+  }
+
 };
 
 // Exported MODEL

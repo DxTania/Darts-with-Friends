@@ -18,10 +18,6 @@ var Security = exports.Security = {
       this.makeSalt() ).digest( 'hex' );
   },
 
-  setAuthCookie: function( user, response ) {
-      response.cookie( 'authtoken', user.authtoken, { maxAge: COOKIE_EXPIRATION, httpOnly: true, path: '/' } );
-  },
-
   encryptPassword: function( password ) {
     var salt = this.makeSalt();
     return 'SHA-1:' + salt + ':' + crypto.createHash( 'sha1' ).update( salt + password ).digest( 'hex' );
@@ -37,5 +33,6 @@ var Security = exports.Security = {
 
     return censored;
   }
+  // TODO: Implement Header Auth
 
 };
