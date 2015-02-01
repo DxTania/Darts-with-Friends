@@ -197,9 +197,10 @@
         android:layout_height="0dip"
         android:layout_weight="1"
         android:background="@drawable/dark_grey_stroke"
-        android:gravity="center">
+        android:gravity="center"
+        android:tag="bullseye">
 
-        <TextView
+    <TextView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:gravity="center"
@@ -212,9 +213,10 @@
         android:layout_height="0dip"
         android:layout_weight="1"
         android:background="@drawable/dark_grey_stroke"
-        android:gravity="center">
+        android:gravity="center"
+        android:tag="miss">
 
-        <TextView
+    <TextView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:gravity="center"

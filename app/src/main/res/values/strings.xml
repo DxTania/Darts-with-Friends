@@ -33,5 +33,7 @@
     <string name="triple">Triple</string>
     <string name="doubleT">Double</string>
     <string name="single">Single</string>
+    <string name="slash">/</string>
+    <string name="bulls">BULLS</string>
 
 </resources>

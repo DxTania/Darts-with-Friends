@@ -12,7 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gmail.dartswithfriends.R;
-import com.gmail.dartswithfriends.selection.Score501301Selection;
 
 import org.json.JSONObject;
 
