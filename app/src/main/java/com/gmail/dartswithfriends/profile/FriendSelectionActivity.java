@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.facebook.HttpMethod;
 import com.facebook.Request;
@@ -46,11 +47,13 @@ public class FriendSelectionActivity extends ActionBarActivity {
     }
 
     private void onFriendsListRetrieved(Response response) throws JSONException {
-        GraphObjectList<GraphUser> data = response.getGraphObject().getPropertyAsList("data", GraphUser.class);
-        Log.d(TAG, data.toString());
-        adapter = new FriendsListAdapter(FriendSelectionActivity.this, data);
-        friends.setAdapter(adapter);
-        // start async tasks to get photos
-
+        if (response != null) {
+            GraphObjectList<GraphUser> data = response.getGraphObject().getPropertyAsList("data", GraphUser.class);
+            Log.d(TAG, data.toString());
+            adapter = new FriendsListAdapter(FriendSelectionActivity.this, data);
+            friends.setAdapter(adapter);
+        } else {
+            Toast.makeText(this, "Couldn't retrieve friends list", Toast.LENGTH_SHORT).show();
+        }
     }
 }

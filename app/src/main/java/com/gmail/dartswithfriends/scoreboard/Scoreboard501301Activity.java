@@ -19,11 +19,10 @@ import org.json.JSONObject;
 public class Scoreboard501301Activity extends ActionBarActivity {
     private final static int SEND_SCORE = 100;
     private static String type;
-    private TextView waitingText, prevScoreUs, prevScoreOpponent;
+    private TextView waitingText;
     private RelativeLayout waitingScreen;
-    private LinearLayout scoreboardYou, scoreboardOpponent, scoreboard;
-
-    private int ourScore, opponentScore;
+    private LinearLayout scoreboard;
+    private PlayerScore player, opponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +30,10 @@ public class Scoreboard501301Activity extends ActionBarActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_scoreboard501301);
         setTitle("Scoreboard");
+
+        // Get intent information
+        boolean creation = getIntent().getBooleanExtra("creation", false);
+        type = getIntent().getStringExtra("gametype");
 
         final ImageButton addEntry = (ImageButton) findViewById(R.id.add_entry);
         addEntry.setOnClickListener(new View.OnClickListener() {
@@ -43,21 +46,21 @@ public class Scoreboard501301Activity extends ActionBarActivity {
         });
         waitingText = (TextView) findViewById(R.id.waiting_text);
         waitingScreen = (RelativeLayout) findViewById(R.id.waiting_screen);
-        scoreboardYou = (LinearLayout) findViewById(R.id.scoreboard_you);
-        scoreboardOpponent = (LinearLayout) findViewById(R.id.scoreboard_opponent);
         scoreboard = (LinearLayout) findViewById(R.id.scoreboard);
 
-        type = getIntent().getStringExtra("gametype");
-        // scores start at 501 or 301
-        prevScoreUs = (TextView) findViewById(R.id.starting_score_you);
-        prevScoreUs.setText(type);
-        prevScoreOpponent = (TextView) findViewById(R.id.starting_score_opponent);
-        prevScoreOpponent.setText(type);
-        ourScore = Integer.valueOf(type);
-        opponentScore = Integer.valueOf(type);
+        // Set up players
+        player = new PlayerScore();
+        player.scoreboard = (LinearLayout) findViewById(R.id.scoreboard_you);
+        ;
+        player.previousScore = (TextView) findViewById(R.id.starting_score_you);
+        player.previousScore.setText(type);
+        player.score = Integer.valueOf(type);
 
-        boolean creation = getIntent().getBooleanExtra("creation", false);
-
+        opponent = new PlayerScore();
+        opponent.scoreboard = (LinearLayout) findViewById(R.id.scoreboard_opponent);
+        opponent.previousScore = (TextView) findViewById(R.id.starting_score_opponent);
+        opponent.previousScore.setText(type);
+        opponent.score = Integer.valueOf(type);
 
         // TODO: wait for response from server before getting rid of loading
         waitingScreen.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +83,7 @@ public class Scoreboard501301Activity extends ActionBarActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == SEND_SCORE) {
             int score = data.getIntExtra("score", 0);
-            subScore(score, true);
+            subScore(player, score);
             // TODO: send score to server + opponent's turn now
         }
     }
@@ -98,25 +101,31 @@ public class Scoreboard501301Activity extends ActionBarActivity {
         // get cached scores + send request to server for updated scores?
     }
 
-    public void subScore(int sub, boolean us) {
-        // add row to scoreboard with new score
-        // cross out score above the new one
+    /**
+     * Add score row to scoreboard
+     * Cross out previous score
+     *
+     * @param player of recent play
+     * @param sub    what they hit
+     */
+    public void subScore(PlayerScore player, int sub) {
+        player.score -= sub;
+
         TextView row = new TextView(this);
         row.setGravity(Gravity.CENTER);
         row.setPadding(5, 5, 5, 5);
         row.setTextSize(20);
-        if (us) {
-            ourScore -= sub;
-            row.setText(String.valueOf(ourScore));
-            scoreboardYou.addView(row);
-            prevScoreUs.setPaintFlags(prevScoreUs.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            prevScoreUs = row;
-        } else {
-            opponentScore -= sub;
-            row.setText(String.valueOf(opponentScore));
-            scoreboardOpponent.addView(row);
-            prevScoreOpponent.setPaintFlags(prevScoreOpponent.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            prevScoreOpponent = row;
-        }
+        row.setText(player.score);
+
+        player.previousScore.setPaintFlags(
+                player.previousScore.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        player.previousScore = row;
+        player.scoreboard.addView(row);
+    }
+
+    static class PlayerScore {
+        int score;
+        LinearLayout scoreboard;
+        TextView previousScore;
     }
 }

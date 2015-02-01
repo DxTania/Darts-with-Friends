@@ -81,17 +81,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -104,17 +100,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
             </TableRow>
 
             <TableRow
@@ -126,17 +118,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -149,17 +137,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
             </TableRow>
 
             <TableRow
@@ -171,17 +155,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -194,17 +174,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
             </TableRow>
 
             <TableRow
@@ -216,17 +192,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -239,17 +211,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
             </TableRow>
 
             <TableRow
@@ -261,17 +229,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -284,17 +248,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
             </TableRow>
 
             <TableRow
@@ -306,17 +266,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -329,17 +285,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
             </TableRow>
 
             <TableRow
@@ -351,17 +303,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -374,17 +322,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
             </TableRow>
 
             <TableRow
@@ -396,17 +340,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -419,17 +359,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/slash"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:textSize="20sp" />
             </TableRow>
         </TableLayout>
     </LinearLayout>
