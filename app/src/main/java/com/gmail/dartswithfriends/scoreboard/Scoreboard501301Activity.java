@@ -18,11 +18,11 @@ import org.json.JSONObject;
 
 public class Scoreboard501301Activity extends ActionBarActivity {
     private final static int SEND_SCORE = 100;
-    private static String type;
-    private TextView waitingText;
-    private RelativeLayout waitingScreen;
-    private LinearLayout scoreboard;
-    private PlayerScore player, opponent;
+    private static String mGameType;
+    private TextView mWaitingText;
+    private RelativeLayout mWaitingScreen;
+    private LinearLayout mScoreboard;
+    private PlayerScore mPlayer, mOpponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class Scoreboard501301Activity extends ActionBarActivity {
 
         // Get intent information
         boolean creation = getIntent().getBooleanExtra("creation", false);
-        type = getIntent().getStringExtra("gametype");
+        mGameType = getIntent().getStringExtra("gametype");
 
         final ImageButton addEntry = (ImageButton) findViewById(R.id.add_entry);
         addEntry.setOnClickListener(new View.OnClickListener() {
@@ -44,38 +44,37 @@ public class Scoreboard501301Activity extends ActionBarActivity {
                 startActivityForResult(scoreSelect, SEND_SCORE);
             }
         });
-        waitingText = (TextView) findViewById(R.id.waiting_text);
-        waitingScreen = (RelativeLayout) findViewById(R.id.waiting_screen);
-        scoreboard = (LinearLayout) findViewById(R.id.scoreboard);
+        mWaitingText = (TextView) findViewById(R.id.waiting_text);
+        mWaitingScreen = (RelativeLayout) findViewById(R.id.waiting_screen);
+        mScoreboard = (LinearLayout) findViewById(R.id.scoreboard);
 
         // Set up players
-        player = new PlayerScore();
-        player.scoreboard = (LinearLayout) findViewById(R.id.scoreboard_you);
-        ;
-        player.previousScore = (TextView) findViewById(R.id.starting_score_you);
-        player.previousScore.setText(type);
-        player.score = Integer.valueOf(type);
+        mPlayer = new PlayerScore();
+        mPlayer.scoreboard = (LinearLayout) findViewById(R.id.scoreboard_you);
+        mPlayer.previousScore = (TextView) findViewById(R.id.starting_score_you);
+        mPlayer.previousScore.setText(mGameType);
+        mPlayer.score = Integer.valueOf(mGameType);
 
-        opponent = new PlayerScore();
-        opponent.scoreboard = (LinearLayout) findViewById(R.id.scoreboard_opponent);
-        opponent.previousScore = (TextView) findViewById(R.id.starting_score_opponent);
-        opponent.previousScore.setText(type);
-        opponent.score = Integer.valueOf(type);
+        mOpponent = new PlayerScore();
+        mOpponent.scoreboard = (LinearLayout) findViewById(R.id.scoreboard_opponent);
+        mOpponent.previousScore = (TextView) findViewById(R.id.starting_score_opponent);
+        mOpponent.previousScore.setText(mGameType);
+        mOpponent.score = Integer.valueOf(mGameType);
 
         // TODO: wait for response from server before getting rid of loading
-        waitingScreen.setOnClickListener(new View.OnClickListener() {
+        mWaitingScreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                waitingScreen.setVisibility(View.INVISIBLE);
+                mWaitingScreen.setVisibility(View.INVISIBLE);
                 addEntry.setVisibility(View.VISIBLE);
-                scoreboard.setVisibility(View.VISIBLE);
+                mScoreboard.setVisibility(View.VISIBLE);
             }
         });
 
         if (creation) {
-            waitingText.setText("Creating game");
+            mWaitingText.setText("Creating game");
         } else {
-            waitingText.setText("Loading game");
+            mWaitingText.setText("Loading game");
         }
     }
 
@@ -83,7 +82,7 @@ public class Scoreboard501301Activity extends ActionBarActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == SEND_SCORE) {
             int score = data.getIntExtra("score", 0);
-            subScore(player, score);
+            subScore(mPlayer, score);
             // TODO: send score to server + opponent's turn now
         }
     }
@@ -115,7 +114,7 @@ public class Scoreboard501301Activity extends ActionBarActivity {
         row.setGravity(Gravity.CENTER);
         row.setPadding(5, 5, 5, 5);
         row.setTextSize(20);
-        row.setText(player.score);
+        row.setText(String.valueOf(player.score));
 
         player.previousScore.setPaintFlags(
                 player.previousScore.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);

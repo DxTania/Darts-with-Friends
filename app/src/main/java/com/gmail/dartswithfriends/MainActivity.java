@@ -19,7 +19,7 @@ import com.gmail.dartswithfriends.selection.OpponentSelectionActivity;
 
 public class MainActivity extends ActionBarActivity {
 
-    private TextView playerWelcome;
+    private TextView mPlayerWelcome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +67,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        playerWelcome = (TextView) findViewById(R.id.playerName);
+        mPlayerWelcome = (TextView) findViewById(R.id.playerName);
         final ProgressBar bar = (ProgressBar) findViewById(R.id.progress);
         final LinearLayout main = (LinearLayout) findViewById(R.id.main);
 
@@ -78,7 +78,7 @@ public class MainActivity extends ActionBarActivity {
                 HttpMethod.GET,
                 new Request.Callback() {
                     public void onCompleted(Response response) {
-                        playerWelcome.setText("Welcome, " +
+                        mPlayerWelcome.setText("Welcome, " +
                                 response.getGraphObject().getProperty("name"));
                         bar.setVisibility(View.GONE);
                         main.setVisibility(View.VISIBLE);

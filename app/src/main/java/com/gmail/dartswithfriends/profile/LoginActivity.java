@@ -10,7 +10,7 @@ import com.gmail.dartswithfriends.MainActivity;
 
 
 public class LoginActivity extends FragmentActivity implements LoginFragment.OnFragmentInteractionListener {
-    private LoginFragment mainFragment;
+    private LoginFragment mLoginFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +18,14 @@ public class LoginActivity extends FragmentActivity implements LoginFragment.OnF
 
         if (savedInstanceState == null) {
             // Add the fragment on initial activity setup
-            mainFragment = LoginFragment.newInstance();
+            mLoginFragment = LoginFragment.newInstance();
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(android.R.id.content, mainFragment)
+                    .add(android.R.id.content, mLoginFragment)
                     .commit();
         } else {
             // Or set the fragment from restored state info
-            mainFragment = (LoginFragment) getSupportFragmentManager()
+            mLoginFragment = (LoginFragment) getSupportFragmentManager()
                     .findFragmentById(android.R.id.content);
         }
     }

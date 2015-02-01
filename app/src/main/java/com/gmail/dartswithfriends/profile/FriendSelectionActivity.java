@@ -18,8 +18,8 @@ import org.json.JSONException;
 
 public class FriendSelectionActivity extends ActionBarActivity {
     private static final String TAG = "FriendSelectionActivity";
-    private FriendsListAdapter adapter;
-    private ListView friends;
+    private FriendsListAdapter mFriendsAdapter;
+    private ListView mFriends;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class FriendSelectionActivity extends ActionBarActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_friend_selection);
 
-        friends = (ListView) findViewById(R.id.friendList);
+        mFriends = (ListView) findViewById(R.id.friendList);
 
         new Request(
                 Session.getActiveSession(),
@@ -50,8 +50,8 @@ public class FriendSelectionActivity extends ActionBarActivity {
         if (response != null) {
             GraphObjectList<GraphUser> data = response.getGraphObject().getPropertyAsList("data", GraphUser.class);
             Log.d(TAG, data.toString());
-            adapter = new FriendsListAdapter(FriendSelectionActivity.this, data);
-            friends.setAdapter(adapter);
+            mFriendsAdapter = new FriendsListAdapter(FriendSelectionActivity.this, data);
+            mFriends.setAdapter(mFriendsAdapter);
         } else {
             Toast.makeText(this, "Couldn't retrieve friends list", Toast.LENGTH_SHORT).show();
         }

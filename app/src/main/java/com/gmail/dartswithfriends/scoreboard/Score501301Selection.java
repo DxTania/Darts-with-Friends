@@ -12,11 +12,11 @@ import android.widget.TextView;
 import com.gmail.dartswithfriends.R;
 
 public class Score501301Selection extends ActionBarActivity {
-    private int dartNum = 1;
-    private int multiplier = 1;
-    private int total_score = 0;
-    private AlertDialog alertDialog = null;
-    final View.OnClickListener scoreClick = new View.OnClickListener() {
+    private int mDartNum = 1;
+    private int mMultiplier = 1;
+    private int mTotalScore = 0;
+    private AlertDialog mAlertDialog = null;
+    final View.OnClickListener mScoreClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             String text;
@@ -30,28 +30,28 @@ public class Score501301Selection extends ActionBarActivity {
                 View.OnClickListener click = new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        multiplier = (Integer) v.getTag();
-                        select(score * multiplier);
-                        alertDialog.dismiss();
+                        mMultiplier = (Integer) v.getTag();
+                        select(score * mMultiplier);
+                        mAlertDialog.dismiss();
                     }
                 };
-                alertDialog = ScoreboardUtils.getSingleTripleAlert(
-                        Score501301Selection.this, dartNum, text, click);
-                alertDialog.show();
+                mAlertDialog = ScoreboardUtils.getSingleTripleAlert(
+                        Score501301Selection.this, mDartNum, text, click);
+                mAlertDialog.show();
             }
         }
     };
 
     public void select(int score) {
-        total_score += score;
-        if (dartNum == 3) {
+        mTotalScore += score;
+        if (mDartNum == 3) {
             Intent result = new Intent();
-            result.putExtra("score", total_score);
+            result.putExtra("score", mTotalScore);
             setResult(Activity.RESULT_OK, result);
             finish();
             overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
         } else {
-            dartNum++;
+            mDartNum++;
         }
     }
 
@@ -69,8 +69,8 @@ public class Score501301Selection extends ActionBarActivity {
         TableRow row3 = (TableRow) findViewById(R.id.row3);
         TableRow row4 = (TableRow) findViewById(R.id.row4);
 
-        miss.setOnClickListener(scoreClick);
-        bullseye.setOnClickListener(scoreClick);
+        miss.setOnClickListener(mScoreClick);
+        bullseye.setOnClickListener(mScoreClick);
         setRowClicks(row1);
         setRowClicks(row2);
         setRowClicks(row3);
@@ -80,14 +80,14 @@ public class Score501301Selection extends ActionBarActivity {
     @Override
     public void onPause() {
         super.onPause();
-        if (alertDialog != null) {
-            alertDialog.dismiss();
+        if (mAlertDialog != null) {
+            mAlertDialog.dismiss();
         }
     }
 
     public void setRowClicks(TableRow row) {
         for (int i = 0; i < row.getChildCount(); i++) {
-            row.getChildAt(i).setOnClickListener(scoreClick);
+            row.getChildAt(i).setOnClickListener(mScoreClick);
         }
     }
 }

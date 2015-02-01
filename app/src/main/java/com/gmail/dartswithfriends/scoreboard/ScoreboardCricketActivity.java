@@ -16,12 +16,12 @@ import java.util.ArrayList;
 
 
 public class ScoreboardCricketActivity extends ActionBarActivity {
-    private TextView waitingText;
-    private RelativeLayout waitingScreen;
-    private LinearLayout scoreboard;
-    private AlertDialog alertDialog;
-    private int dartNum = 1;
-    private PlayerScore player, opponent;
+    private TextView mWaitingText;
+    private RelativeLayout mWaitingScreen;
+    private LinearLayout mScoreboard;
+    private AlertDialog mAlertDialog;
+    private int mDartNum = 1;
+    private PlayerScore mPlayer, mOpponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +32,9 @@ public class ScoreboardCricketActivity extends ActionBarActivity {
 
         boolean creation = getIntent().getBooleanExtra("creation", false);
 
-        waitingText = (TextView) findViewById(R.id.waiting_text);
-        waitingScreen = (RelativeLayout) findViewById(R.id.waiting_screen);
-        scoreboard = (LinearLayout) findViewById(R.id.scoreboard);
+        mWaitingText = (TextView) findViewById(R.id.waiting_text);
+        mWaitingScreen = (RelativeLayout) findViewById(R.id.waiting_screen);
+        mScoreboard = (LinearLayout) findViewById(R.id.scoreboard);
 
         TableLayout score_numbers = (TableLayout) findViewById(R.id.score_numbers);
         for (int i = 0; i < score_numbers.getChildCount(); i++) {
@@ -46,14 +46,14 @@ public class ScoreboardCricketActivity extends ActionBarActivity {
                         @Override
                         public void onClick(View v) {
                             markScore(true, row, (Integer) v.getTag());
-                            alertDialog.dismiss();
+                            mAlertDialog.dismiss();
                         }
                     };
                     // there are 5 cols, middle is label
                     String text = ((TextView) row.getChildAt(2)).getText().toString();
-                    alertDialog = ScoreboardUtils.getSingleTripleAlert(
-                            ScoreboardCricketActivity.this, dartNum, text, click);
-                    alertDialog.show();
+                    mAlertDialog = ScoreboardUtils.getSingleTripleAlert(
+                            ScoreboardCricketActivity.this, mDartNum, text, click);
+                    mAlertDialog.show();
                 }
             });
         }
@@ -70,24 +70,24 @@ public class ScoreboardCricketActivity extends ActionBarActivity {
         bulls.score = 25;
         numberStates.add(bulls);
 
-        player = new PlayerScore();
-        player.numberStates = numberStates;
-        opponent = new PlayerScore();
-        opponent.numberStates = numberStates;
+        mPlayer = new PlayerScore();
+        mPlayer.numberStates = numberStates;
+        mOpponent = new PlayerScore();
+        mOpponent.numberStates = numberStates;
 
         // TODO: wait for response from server before getting rid of loading
-        waitingScreen.setOnClickListener(new View.OnClickListener() {
+        mWaitingScreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                waitingScreen.setVisibility(View.INVISIBLE);
-                scoreboard.setVisibility(View.VISIBLE);
+                mWaitingScreen.setVisibility(View.INVISIBLE);
+                mScoreboard.setVisibility(View.VISIBLE);
             }
         });
 
         if (creation) {
-            waitingText.setText("Creating game");
+            mWaitingText.setText("Creating game");
         } else {
-            waitingText.setText("Loading game");
+            mWaitingText.setText("Loading game");
         }
     }
 
@@ -98,7 +98,7 @@ public class ScoreboardCricketActivity extends ActionBarActivity {
 
         if (us) {
             int score = 0;
-            dartNum++;
+            mDartNum++;
             if (text.equals(getString(R.string.bulls))) {
                 score = 25;
             } else if (text.equals(getString(R.string.miss))) {
@@ -107,7 +107,7 @@ public class ScoreboardCricketActivity extends ActionBarActivity {
                 score = Integer.valueOf(text);
             }
 
-            NumberState number = updateNumberState(score, marks, player);
+            NumberState number = updateNumberState(score, marks, mPlayer);
 
             int prevMarks = number.marks - marks;
             if (prevMarks == 0) {
@@ -128,9 +128,9 @@ public class ScoreboardCricketActivity extends ActionBarActivity {
                 markTwo.setText("XXⓍ");
             }
 
-            if (dartNum == 4) {
+            if (mDartNum == 4) {
                 // opponent's turn! TODO: send scores to server and wait
-                dartNum = 1;
+                mDartNum = 1;
             }
         } else {
 
@@ -140,8 +140,8 @@ public class ScoreboardCricketActivity extends ActionBarActivity {
     @Override
     public void onPause() {
         super.onPause();
-        if (alertDialog != null) {
-            alertDialog.dismiss();
+        if (mAlertDialog != null) {
+            mAlertDialog.dismiss();
         }
     }
 
