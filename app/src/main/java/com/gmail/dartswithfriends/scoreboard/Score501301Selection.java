@@ -70,7 +70,9 @@ public class Score501301Selection extends ActionBarActivity {
         TableRow row4 = (TableRow) findViewById(R.id.row4);
 
         miss.setOnClickListener(mScoreClick);
+        miss.setBackgroundResource(R.drawable.pressed_grey_stroked);
         bullseye.setOnClickListener(mScoreClick);
+        bullseye.setBackgroundResource(R.drawable.pressed_grey_stroked);
         setRowClicks(row1);
         setRowClicks(row2);
         setRowClicks(row3);
@@ -88,6 +90,7 @@ public class Score501301Selection extends ActionBarActivity {
     public void setRowClicks(TableRow row) {
         for (int i = 0; i < row.getChildCount(); i++) {
             row.getChildAt(i).setOnClickListener(mScoreClick);
+            row.getChildAt(i).setBackgroundResource(R.drawable.pressed_grey_stroked);
         }
     }
 }

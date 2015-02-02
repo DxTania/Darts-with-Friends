@@ -40,6 +40,7 @@ public class ScoreboardCricketActivity extends ActionBarActivity {
         TableLayout score_numbers = (TableLayout) findViewById(R.id.score_numbers);
         for (int i = 0; i < score_numbers.getChildCount(); i++) {
             final TableRow row = (TableRow) score_numbers.getChildAt(i);
+            row.setBackgroundResource(R.drawable.pressed_grey);
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -126,7 +127,7 @@ public class ScoreboardCricketActivity extends ActionBarActivity {
             } else if (prevMarks == 1) {
                 if (marks == 1) {
                     markTwo.setText("X");
-                } else if (marks == 2) {
+                } else if (marks > 1) {
                     markTwo.setText("(/)");
                 }
             } else if (prevMarks == 2) {

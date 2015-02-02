@@ -6,12 +6,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.gmail.dartswithfriends.R;
+
 
 public class ScoreboardUtils {
 
     public static AlertDialog getSingleTripleAlert(Context context, int dartNum, String text,
                                                    View.OnClickListener onClickListener) {
-
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setTitle("Dart " + dartNum + ": " + text);
 
@@ -29,9 +30,10 @@ public class ScoreboardUtils {
     public static TextView createNumberDialog(String text, View.OnClickListener onClickListener,
                                               Context context, int tag) {
         TextView res = new TextView(context);
+        res.setBackgroundResource(R.drawable.pressed_blue);
         res.setText(text);
         res.setTextSize(25);
-        res.setPadding(5, 5, 5, 5);
+        res.setPadding(10, 10, 10, 10);
         res.setTag(tag);
         res.setOnClickListener(onClickListener);
         return res;
