@@ -20,6 +20,8 @@ import com.gmail.dartswithfriends.selection.OpponentSelectionActivity;
 public class MainActivity extends ActionBarActivity {
 
     private TextView mPlayerWelcome;
+    private LinearLayout mMainLayout;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,10 @@ public class MainActivity extends ActionBarActivity {
         setTitle("Darts with Friends");
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+
+        mProgressBar = (ProgressBar) findViewById(R.id.progress);
+        mPlayerWelcome = (TextView) findViewById(R.id.playerName);
+        mMainLayout = (LinearLayout) findViewById(R.id.main);
 
         Button createGame = (Button) findViewById(R.id.create_game_button);
         createGame.setOnClickListener(new View.OnClickListener() {
@@ -67,10 +73,6 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        mPlayerWelcome = (TextView) findViewById(R.id.playerName);
-        final ProgressBar bar = (ProgressBar) findViewById(R.id.progress);
-        final LinearLayout main = (LinearLayout) findViewById(R.id.main);
-
         new Request(
                 Session.getActiveSession(),
                 "/me",
@@ -78,13 +80,14 @@ public class MainActivity extends ActionBarActivity {
                 HttpMethod.GET,
                 new Request.Callback() {
                     public void onCompleted(Response response) {
-                        mPlayerWelcome.setText("Welcome, " +
-                                response.getGraphObject().getProperty("name"));
-                        bar.setVisibility(View.GONE);
-                        main.setVisibility(View.VISIBLE);
+                        if (response != null) {
+                            mProgressBar.setVisibility(View.GONE);
+                            mMainLayout.setVisibility(View.VISIBLE);
+                            String name = response.getGraphObject().getProperty("name").toString();
+                            mPlayerWelcome.setText("Welcome, " + name);
+                        }
                     }
                 }
         ).executeAsync();
-
     }
 }

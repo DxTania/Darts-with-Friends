@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gmail.dartswithfriends.R;
 
@@ -84,6 +85,7 @@ public class Scoreboard501301Activity extends ActionBarActivity {
             int score = data.getIntExtra("score", 0);
             subScore(mPlayer, score);
             // TODO: send score to server + opponent's turn now
+            Toast.makeText(this, "Opponent's turn!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -108,6 +110,10 @@ public class Scoreboard501301Activity extends ActionBarActivity {
      * @param sub    what they hit
      */
     public void subScore(PlayerScore player, int sub) {
+        if (player.score - sub < 0) {
+            return;
+        }
+
         player.score -= sub;
 
         TextView row = new TextView(this);
