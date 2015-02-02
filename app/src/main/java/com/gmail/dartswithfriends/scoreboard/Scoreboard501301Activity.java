@@ -81,7 +81,7 @@ public class Scoreboard501301Activity extends ActionBarActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == SEND_SCORE) {
+        if (requestCode == SEND_SCORE && resultCode == RESULT_OK) {
             int score = data.getIntExtra("score", 0);
             subScore(mPlayer, score);
             // TODO: send score to server + opponent's turn now
