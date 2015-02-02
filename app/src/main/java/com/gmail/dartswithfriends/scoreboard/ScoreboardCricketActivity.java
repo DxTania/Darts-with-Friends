@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gmail.dartswithfriends.R;
 
@@ -51,9 +52,13 @@ public class ScoreboardCricketActivity extends ActionBarActivity {
                     };
                     // there are 5 cols, middle is label
                     String text = ((TextView) row.getChildAt(2)).getText().toString();
-                    mAlertDialog = ScoreboardUtils.getSingleTripleAlert(
-                            ScoreboardCricketActivity.this, mDartNum, text, click);
-                    mAlertDialog.show();
+                    if (!text.equals(getString(R.string.miss))) {
+                        mAlertDialog = ScoreboardUtils.getSingleTripleAlert(
+                                ScoreboardCricketActivity.this, mDartNum, text, click);
+                        mAlertDialog.show();
+                    } else {
+                        markScore(true, row, 0);
+                    }
                 }
             });
         }
@@ -115,7 +120,7 @@ public class ScoreboardCricketActivity extends ActionBarActivity {
                     markTwo.setText("/");
                 } else if (marks == 2) {
                     markTwo.setText("X");
-                } else {
+                } else if (marks >= 3) {
                     markTwo.setText("O");
                 }
             } else if (prevMarks == 1) {
@@ -131,6 +136,7 @@ public class ScoreboardCricketActivity extends ActionBarActivity {
             if (mDartNum == 4) {
                 // opponent's turn! TODO: send scores to server and wait
                 mDartNum = 1;
+                Toast.makeText(this, "Opponent's turn!", Toast.LENGTH_SHORT).show();
             }
         } else {
 
