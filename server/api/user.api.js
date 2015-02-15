@@ -1,8 +1,65 @@
 var mongoose = require( 'mongoose' ),
 		api = require( API_CORE ),
-	Utils = require( UTILS_PATH ),
+		Utils = require( UTILS_PATH ),
 		User = mongoose.model( 'User' ),
 		express = require( 'express' );
+
+
+
+
+/**************************************
+ * User api helpers
+ **************************************/
+/*******
+ * @function userResponse sends a formatted user object response
+ * @param user
+ * @param responseObj
+ */
+var userResponse = function( user, responseObj ) {
+	var censoredFields = { password: true };
+	var censoredUser = Utils.Security.censorResponse( user, censoredFields );
+	// TODO: Implement header auth
+	//Utils.Security.setAuthCookie( user, responseObj );
+	api.JsonResponse( censoredUser, responseObj, 200 );
+};
+
+
+/******
+ * @function invalidAuthResponse sends http response for invalid authentication
+ * @param responseObj
+ */
+var invalidAuthResponse = function( responseObj ) {
+	api.JsonResponse( 'Invalid userName/password combination.', responseObj, 400 );
+	return;
+};
+
+
+/******
+ * @function makeReqFun makes a function to require a parameter
+ * @param required
+ * @returns {Function}
+ */
+function makeReqFun( required ) {
+	return function( req, res, next ) {
+		if ( !req.body[required] ) {
+			api.JsonResponse( "Missing parameter: " + required, res, 400 );
+			return false;
+		}
+		return next();
+	}
+}
+
+// For requiring post parameters
+var requirables = [ "authToken", "name", "isFacebook", "fbAuthToken" ];
+var requireParam = {};
+for ( var i = 0; i < requirables.length; i++ ) {
+	var required = requirables[i];
+
+	requireParam[required] = makeReqFun( required );
+}
+
+
+
 
 
 //*********************************************
@@ -12,42 +69,13 @@ var mongoose = require( 'mongoose' ),
 exports.bind = function( app ) {
 	var userRouter = express.Router();
 
-	var userResponse = function( user, responseObj ) {
-		var censoredFields = { password: true };
-		var censoredUser = Utils.Security.censorResponse( user, censoredFields );
-		// TODO: Implement header auth
-		//Utils.Security.setAuthCookie( user, responseObj );
-		api.JsonResponse( censoredUser, responseObj, 200 );
-	};
-
-	var invalidAuthResponse = function( responseObj ) {
- 	  api.JsonResponse( 'Invalid userName/password combination.', responseObj, 400 );
- 	  return;
-	};
-
-	function makeReqFun( required ) {
-		return function( req, res, next ) {
-			if ( !req.body[required] ) {
-				api.JsonResponse( "Missing parameter: " + required, res, 400 );
-				return false;
-			}
-			return next();
-		}
-	}
-
-	// For requiring post parameters
-	var requirables = [ "authToken", "name", "isFacebook", "fbAuthToken" ];
-	var requireParam = {};
-	for ( var i = 0; i < requirables.length; i++ ) {
-		var required = requirables[i];
-
-		requireParam[required] = makeReqFun( required );
-	}
-
+	/************************************************************
+	 * Route: '/user/' creates a new user with the post params:
+	 * 			name, password||fbauthtoken
+	 * Type: POST
+	 ************************************************************/
 	// Create new user, require name and post parameters
 	userRouter.post( '/', requireParam["name"], function( req, res, next ) {
-		console.log( "Hello" );
-		console.log( req.body );
 		// TODO Validate Parameters
 		var newUser = new User({
 			name: req.body.name
@@ -78,6 +106,11 @@ exports.bind = function( app ) {
 	});
 
 
+	/************************************************************
+	 * Route: '/user/signin' sends an auth token to the frontend
+	 * 		params: name, fbAuthToken||password
+	 * Type: POST
+	 ************************************************************/
 	// Resends auth token to user.
 	userRouter.post( '/signin', function( req, res, next ) {
 		// TODO: validate parameters
@@ -98,6 +131,9 @@ exports.bind = function( app ) {
 
 		});
 	});
+
+
+
 
 	// Link user router to application
 	app.use( '/user', userRouter );
