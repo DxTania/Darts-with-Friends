@@ -1,8 +1,8 @@
 var mongoose = require( 'mongoose' ),
 		api = require( API_CORE ),
+	Utils = require( UTILS_PATH ),
 		User = mongoose.model( 'User' ),
 		Game = mongoose.model( 'Game' ),
-		Utils = require( UTILS_PATH ),
 		express = require( 'express' );
 
 
@@ -11,12 +11,12 @@ var mongoose = require( 'mongoose' ),
 //* Includes initial ghateway signup
 //*********************************************
 exports.bind = function( app ) {
-	var gamesRouter = express.Router();
+	var gameRouter = express.Router();
 
-	// TODO: EVERYTHING
 	// New game creation
-	userRouter.post( '/game', function( req, res, next ) {
+	gameRouter.post( '/game', function( req, res, next ) {
 		// Create newUser object and setup auth data
+		// TODO: Validate parameters
 		var playerOne = User.findById( req.body.playerOneId );
 		var playerTwo = User.findById( req.body.playerTwoId );
 
@@ -25,19 +25,31 @@ exports.bind = function( app ) {
 			playerOne: { id: playerOne._id, name: playerOne.name },
 			playerTwo: { id: playerTwo._id, name: playerTwo.name },
 			turnPlayerId: playerOne._id
-			// playerOne: req.body.playerOne,
 		});
 
 		newGame.save( function( error, game ) {
 			if ( error ) {
-				api.ServerErrorResponse( error, response );
+				api.ServerErrorResponse( error, res );
 				return;
 			}
-			api.JsonResponse( game, response, 200 );
-			next();
+			api.JsonResponse( game, res, 200 );
+			return next();
 		});
-
 	});
 
-	app.use(gamesRouter);
+	gameRouter.get( '/game/:gameId', function( req, res, next ) {
+		var gameId = req.param( "gameId" );
+		// TODO: Validate parameters
+
+		Game.statics.findById( gameId, function( error, game ) {
+			if ( error ) {
+				api.ServerErrorResponse( error, res );
+				return;
+			}
+			api.JsonResponse( game, res, 200 );
+			return next();
+		})
+	});
+
+	app.use(gameRouter);
 };

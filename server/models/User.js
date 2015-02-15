@@ -14,10 +14,10 @@ var mongoose = require('mongoose'),
 
 var UserSchema = new Schema({
   name:               { type: String, unique: true },
-  isFacebook:         { type: Boolean },
   password:           { type: String },
   authToken:          { type: String },
-  fbAuthToken:        { type: String }
+  fbAuthToken:        { type: String },
+  fbId:               { type: Number, unique: true }
 });
 
 
@@ -41,11 +41,11 @@ UserSchema.methods = {
 
 // Static Methods
 UserSchema.statics = {
-  findById: function findOne( id, callback ) {
-    return this.where( {"_id": id} ).exec( callback );
+  findById: function findById( id, callback ) {
+    return this.where( {"_id": id} ).findOne( callback );
   },
-  findByName: function findOne( name, callback ) {
-    return this.where({ "name": name } ).exec( callback );
+  findByName: function findByName( name, callback ) {
+    return this.where({ "name": name } ).findOne( callback );
   }
 }
 
