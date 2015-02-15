@@ -17,7 +17,7 @@ var UserSchema = new Schema({
   password:           { type: String },
   authToken:          { type: String },
   fbAuthToken:        { type: String },
-  fbId:               { type: Number, unique: true }
+  //fbId:               { type: Number, unique: true }
 });
 
 
