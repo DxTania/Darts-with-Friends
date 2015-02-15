@@ -16,14 +16,16 @@ var UserSchema = new Schema({
   name:               { type: String, unique: true },
   password:           { type: String },
   authToken:          { type: String },
-  fbAuthToken:        { type: String },
-  //fbId:               { type: Number, unique: true }
+  fbAccessToken:      { type: String }
 });
+
 
 
 // Requirements
 // UserSchema.path('name').required( true, 'Please provide a userName.');
 UserSchema.plugin( uniqueValidator, { message: 'That userName is already in use.'} );
+
+
 
 // Model Helpers
 UserSchema.methods = {
@@ -38,6 +40,8 @@ UserSchema.methods = {
   }
 
 };
+
+
 
 // Static Methods
 UserSchema.statics = {
