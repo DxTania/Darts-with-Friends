@@ -38,6 +38,11 @@ var existingUserResponse = function( responseObj ) {
 	return;
 }
 
+var missingAuthResponse = function( responseObj ) {
+	api.JsonResponse( 'Missing authentication parameter.', responseObj, 400 );
+	return;
+}
+
 /******
  * @function makeReqFun makes a function to require a parameter
  * @param required
@@ -54,7 +59,7 @@ function makeReqFun( required ) {
 }
 
 // For requiring post parameters
-var requirables = [ "authToken", "email", "name", "isFacebook", "fbAuthToken" ];
+var requirables = [ "authToken", "email", "name", "fbAccessToken" ];
 var requireParam = {};
 for ( var i = 0; i < requirables.length; i++ ) {
 	var required = requirables[i];
@@ -94,17 +99,17 @@ exports.bind = function( app ) {
 			email: req.body.email
 		});
 
-		if ( !req.body["fbAuthToken"] && !req.body["password"] ) {
-			invalidAuthResponse( res );
+		if ( !req.body["fbAccessToken"] && !req.body["password"] ) {
+			missingAuthResponse( res );
 			return next();
 		}
 
 		// If not facebook register, build password
-		if ( !req.body["fbAuthToken"] ) {
+		if ( !req.body["fbAccessToken"] ) {
 			newUser.password = Utils.Security.encryptPassword( req.body.password );
 		} else {
 			// Give new user it's fbAuthToken value
-			newUser.fbAuthToken = req.body.fbAuthToken;
+			newUser.fbAccessToken = req.body.fbAccessToken;
 		}
 
 		newUser.authToken = Utils.Security.getAuthToken();
@@ -117,6 +122,10 @@ exports.bind = function( app ) {
 			userResponse( user, res );
 			return next();
 		});
+	});
+
+	userRouter.post('/facebook/', requireParam['fbAccessToken'], function( req, res, next ) {
+
 	});
 
 
