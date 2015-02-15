@@ -13,20 +13,20 @@ var mongoose = require('mongoose'),
 var GameSchema = new Schema({
   gameType:           { type: String },
   playerOne:          {
-                        id: Number,
+                        id: String,
                         name: String
                       },
   playerTwo:          {
-                        id: Number,
+                        id: String,
                         name: String
                       },
-  turnPlayerId:       { type: Number },
+  turnPlayerId:       { type: String },
   scoresOne:          [ Number ],
   scoresTwo:          [ Number ],
   startDate:          { type: Date, default: Date.now },
   endDate:            { type: Date },
-  winnerId:           { type: Number },
-  loserId:            { type: Number },
+  winnerId:           { type: String },
+  loserId:            { type: String },
   status:             { type: String, default: "pending" },
   turnCount:          { type: Number, default: 0 }
 

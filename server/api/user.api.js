@@ -18,40 +18,48 @@ exports.bind = function( app ) {
 		// TODO: Implement header auth
 		//Utils.Security.setAuthCookie( user, responseObj );
 		api.JsonResponse( censoredUser, responseObj, 200 );
-	}
+	};
 
 	var invalidAuthResponse = function( responseObj ) {
  	  api.JsonResponse( 'Invalid userName/password combination.', responseObj, 400 );
  	  return;
-	}
+	};
 
-	// For requiring post parameters
-	var requirables = [ "authToken", "name", "isFacebook", "fbAuthToken" ];
-	var requireParam = [];
-	for ( var i = 0; i < requirables.length; i++ ) {
-		requireParam[requirables[i]] = function( req, res, next ) {
-			if ( !req.body[requirables[i]] ) {
-				api.JsonResponse( "Missing parameter: " + requirables[i], res, 400 );
+	function makeReqFun( required ) {
+		return function( req, res, next ) {
+			if ( !req.body[required] ) {
+				api.JsonResponse( "Missing parameter: " + required, res, 400 );
 				return false;
 			}
 			return next();
 		}
 	}
 
+	// For requiring post parameters
+	var requirables = [ "authToken", "name", "isFacebook", "fbAuthToken" ];
+	var requireParam = {};
+	for ( var i = 0; i < requirables.length; i++ ) {
+		var required = requirables[i];
+
+		requireParam[required] = makeReqFun( required );
+	}
+
 	// Create new user, require name and post parameters
-	userRouter.post( '/', requireParam["name"], requireParam["isFacebook"], function( req, res, next ) {
+	userRouter.post( '/', requireParam["name"], function( req, res, next ) {
+		console.log( "Hello" );
+		console.log( req.body );
 		// TODO Validate Parameters
 		var newUser = new User({
 			name: req.body.name
 		});
 
-		// If not facebook register, build password
-		if ( !req.body.isFacebook ) {
-			newUser.password = Utils.Security.encryptPassword( req.body.password );
+		if ( !req.body["fbAuthToken"] && !req.body["password"] ) {
+			invalidAuthResponse( res );
+		}
 
-		} else if ( !requireParam["fbAuthToken"] ) {
-			// If facebook register, require fbAuthToken
-			return next();
+		// If not facebook register, build password
+		if ( !req.body["fbAuthToken"] ) {
+			newUser.password = Utils.Security.encryptPassword( req.body.password );
 		} else {
 			// Give new user it's fbAuthToken value
 			newUser.fbAuthToken = req.body.fbAuthToken;
@@ -71,7 +79,7 @@ exports.bind = function( app ) {
 
 
 	// Resends auth token to user.
-	userRouter.post( '/signin', requireParam["isFacebook"], function( req, res, next ) {
+	userRouter.post( '/signin', function( req, res, next ) {
 		// TODO: validate parameters
 		User.findByName( req.body.name , function( error, existingUser ) {
 			if ( error ) {
@@ -79,8 +87,8 @@ exports.bind = function( app ) {
 			 	return;
 			}
 
-		 	if ( !existingUser || ( !req.body.isFacebook && !existingUser.checkPassword( req.body.password) )
-				   || ( req.body.isFacebook && existingUser.fbAuthToken != req.body["fbAuthToken"] )) {
+		 	if ( !existingUser || ( !req.body.fbAuthToken && !existingUser.checkPassword( req.body.password) )
+				   || ( existingUser.fbAuthToken != req.body["fbAuthToken"] )) {
 		 	  invalidAuthResponse( res );
 				return;
 			}
@@ -94,4 +102,4 @@ exports.bind = function( app ) {
 	// Link user router to application
 	app.use( '/user', userRouter );
 
-}
+};

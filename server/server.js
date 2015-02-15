@@ -72,7 +72,7 @@ process.on( 'uncaughtException', function( error ) {
 // Setup all middleware
 var app = express();
 // Body parser for parameter reading
-app.use( bodyParser.json() );
+app.use( bodyParser.json({}) );
 // Validator which will help with validating request params
 app.use( expressValidator() );
 
