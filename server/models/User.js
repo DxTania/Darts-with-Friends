@@ -6,10 +6,11 @@
 //* @requires mongoose-unique-validator
 //* @requires crypto
 //*******************************************
-var mongoose = require('mongoose'),
-    uniqueValidator = require('mongoose-unique-validator'),
+var mongoose = require( 'mongoose' ),
+    uniqueValidator = require( 'mongoose-unique-validator' ),
     Schema = mongoose.Schema,
-    crypto = require('crypto');
+    crypto = require( 'crypto' ),
+    request = require( 'request' );
 
 
 var UserSchema = new Schema({
@@ -61,7 +62,19 @@ UserSchema.statics = {
     this.where({ "email": email } ).findOne( function( err, exUser ) {
       return callback( !!exUser );
     });
-  }
+  }//,
+  //verifyFacebookAccess: function verifyFacebookAccess( accessToken, userId, callback ) {
+  //  // TODO: request to https://graph.facebook.com/me?fields=id&access_token=@accesstoken
+  //  // TODO: add fields for the data
+  //  // TODO: Match userId to the responses userId, callback with error or data
+  //  request( 'https://graph.facebook.com/me?fields=id&access_token='+accessToken, function( err, res, body ) {
+  //    if ( error ) return callback( error );
+  //
+  //
+  //  });
+  //}
+
+
 }
 
 // Exported MODEL
