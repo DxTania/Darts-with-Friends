@@ -13,10 +13,12 @@ var mongoose = require('mongoose'),
 
 
 var UserSchema = new Schema({
-  name:               { type: String, unique: true },
+  email:              { type: String, unique: true },
+  name:               { type: String },
   password:           { type: String },
   authToken:          { type: String },
-  fbAccessToken:      { type: String }
+  fbAccessToken:      { type: String },
+  fbId:               { type: String }     // TODO: Unique
 });
 
 
@@ -48,8 +50,17 @@ UserSchema.statics = {
   findById: function findById( id, callback ) {
     return this.where( {"_id": id} ).findOne( callback );
   },
+  findByEmail: function findByEmail( email, callback ) {
+    return this.where( {"email": email} ).findOne( callback );
+  },
   findByName: function findByName( name, callback ) {
-    return this.where({ "name": name } ).findOne( callback );
+    return this.where({ "name": name }).findOne( callback );
+  },
+
+  checkExisting: function checkExisting( email, callback ) {
+    this.where({ "email": email } ).findOne( function( err, exUser ) {
+      return callback( !!exUser );
+    });
   }
 }
 

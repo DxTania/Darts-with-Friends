@@ -33,6 +33,10 @@ var invalidAuthResponse = function( responseObj ) {
 	return;
 };
 
+var existingUserResponse = function( responseObj ) {
+	api.JsonResponse( 'That email is already in use.', responseObj, 400 );
+	return;
+}
 
 /******
  * @function makeReqFun makes a function to require a parameter
@@ -50,7 +54,7 @@ function makeReqFun( required ) {
 }
 
 // For requiring post parameters
-var requirables = [ "authToken", "name", "isFacebook", "fbAuthToken" ];
+var requirables = [ "authToken", "email", "name", "isFacebook", "fbAuthToken" ];
 var requireParam = {};
 for ( var i = 0; i < requirables.length; i++ ) {
 	var required = requirables[i];
@@ -75,14 +79,24 @@ exports.bind = function( app ) {
 	 * Type: POST
 	 ************************************************************/
 	// Create new user, require name and post parameters
-	userRouter.post( '/', requireParam["name"], function( req, res, next ) {
+	userRouter.post( '/', requireParam["email"], function( req, res, next ) {
+
+		// Check if user already exists
+		User.checkExisting( req.body.email, function( isExistingUser ) {
+			if ( isExistingUser ) {
+				existingUserResponse( res );
+				return next();
+			}
+		});
+
 		// TODO Validate Parameters
 		var newUser = new User({
-			name: req.body.name
+			email: req.body.email
 		});
 
 		if ( !req.body["fbAuthToken"] && !req.body["password"] ) {
 			invalidAuthResponse( res );
+			return next();
 		}
 
 		// If not facebook register, build password
@@ -131,9 +145,6 @@ exports.bind = function( app ) {
 
 		});
 	});
-
-
-
 
 	// Link user router to application
 	app.use( '/user', userRouter );
