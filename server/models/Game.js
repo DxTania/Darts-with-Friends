@@ -34,13 +34,19 @@ var GameSchema = new Schema({
 });
 
 
+
 // Requirements
 // TODO: Required fields
+
+
+
 
 // Model Helpers
 GameSchema.methods = {
 
 };
+
+
 
 GameSchema.statics = {
   findById: function findById( id, callback ) {
