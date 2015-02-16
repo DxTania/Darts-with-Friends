@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
@@ -67,6 +69,22 @@ public class LoginFragment extends Fragment {
         LoginButton authButton = (LoginButton) view.findViewById(R.id.authButton);
         authButton.setFragment(this);
         authButton.setReadPermissions(Arrays.asList("user_likes", "user_status", "user_friends"));
+
+        EditText email = (EditText) view.findViewById(R.id.email);
+        EditText password = (EditText) view.findViewById(R.id.password);
+
+        email.setWidth(authButton.getWidth());
+        password.setWidth(authButton.getWidth());
+
+        Button loginButton = (Button) view.findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: make re  quest to server and log in if possible, if so go to main activity else go to sign up activity
+                Intent signUp = new Intent(getActivity(), SignUpActivity.class);
+                startActivity(signUp);
+            }
+        });
 
         return view;
     }

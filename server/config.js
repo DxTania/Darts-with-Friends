@@ -4,5 +4,3 @@ var config = {
 }
 
 module.exports = config;
-
-// test

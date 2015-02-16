@@ -35,5 +35,6 @@
     <string name="single">Single</string>
     <string name="slash">/</string>
     <string name="bulls">BULLS</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
 
 </resources>

@@ -9,9 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.facebook.HttpMethod;
-import com.facebook.Request;
-import com.facebook.Response;
 import com.facebook.Session;
 import com.gmail.dartswithfriends.profile.LoginActivity;
 import com.gmail.dartswithfriends.scoreboard.Scoreboard501301Activity;
@@ -73,21 +70,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        new Request(
-                Session.getActiveSession(),
-                "/me",
-                null,
-                HttpMethod.GET,
-                new Request.Callback() {
-                    public void onCompleted(Response response) {
-                        if (response != null) {
-                            mProgressBar.setVisibility(View.GONE);
-                            mMainLayout.setVisibility(View.VISIBLE);
-                            String name = response.getGraphObject().getProperty("name").toString();
-                            mPlayerWelcome.setText("Welcome, " + name);
-                        }
-                    }
-                }
-        ).executeAsync();
+        mProgressBar.setVisibility(View.INVISIBLE);
+        mMainLayout.setVisibility(View.VISIBLE);
     }
 }
